@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+    xmlns:bootstrapthumbnail="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/com.chemlab">
+   
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        
+        <com.beardedhen.androidbootstrap.BootstrapThumbnail
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			bootstrapthumbnail:bt_width="60dp"
+			bootstrapthumbnail:bt_height="60dp"
+			android:layout_marginTop="10dp"
+			bootstrapthumbnail:bt_inside_padding="0dp"
+			bootstrapthumbnail:bt_image="@drawable/bbuton_primary"
+		/>
+        
+        <LinearLayout 
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+	            android:text="name"
+	            android:textSize="26sp"
+	            android:background="@drawable/bbuton_danger"
+            />
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+	            android:text="id"
+	            android:textSize="20sp"
+	            android:background="@drawable/bbuton_info"
+            />
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_marginTop="10dp"
+		android:text="个人信息"
+		bootstrapbutton:bb_icon_right="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="false"
+		bootstrapbutton:bb_type="primary"
+		/>
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_marginTop="10dp"
+		android:text="修改个人信息"
+		bootstrapbutton:bb_icon_left="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="true"
+		bootstrapbutton:bb_type="success"
+		/>
+    
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_marginTop="10dp"
+		android:text="签到/签退"
+		bootstrapbutton:bb_icon_left="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="true"
+		bootstrapbutton:bb_type="info"
+		/>
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_marginTop="10dp"
+		android:text="我的排班"
+		bootstrapbutton:bb_icon_left="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="true"
+		bootstrapbutton:bb_type="warning"
+		/>
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_margin="10dp"
+		android:text="工时统计"
+		bootstrapbutton:bb_icon_left="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="true"
+		bootstrapbutton:bb_type="danger"
+		/>
+    <com.beardedhen.androidbootstrap.BootstrapButton
+		android:layout_width="match_parent"
+		android:layout_height="50dp"
+		android:layout_margin="10dp"
+		android:text="今日感想"
+		bootstrapbutton:bb_icon_left="fa-cloud"
+		bootstrapbutton:bb_roundedCorners="true"
+		bootstrapbutton:bb_type="inverse"
+		/>
+    
+
+</LinearLayout>
