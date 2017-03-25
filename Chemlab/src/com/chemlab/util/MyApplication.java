@@ -14,12 +14,12 @@ public class MyApplication extends Application {
 	public static String HOST = "http://bxw2359770225.my3w.com";
 	
 	private static Context context;
-	private SharedPreferences pref;
+	private static SharedPreferences pref;
 	
 	@Override
 	public void onCreate() {
 		context = getApplicationContext();
-		pref = PreferenceManager.getDefaultSharedPreferences(this);
+		pref = PreferenceManager.getDefaultSharedPreferences(context);
 		
 		ID = pref.getString("name", "1111");
 		PW = pref.getString("password", "1111");
@@ -30,5 +30,13 @@ public class MyApplication extends Application {
 		return context;
 	}
 	
+	public static void saveString(Context context, String key, String value) {
+		pref.edit().putString(key, value).commit();
+
+	}
+
+	public static String getString(Context context, String key) {
+		return pref.getString(key, "");
+	}
 	 
 }

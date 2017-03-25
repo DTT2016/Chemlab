@@ -34,5 +34,6 @@
 	<string name="updated_just_now">刚刚更新</string>
 	<string name="time_error">时间有问题</string>
 	<string name="search">搜索</string>
-
+	
+	<string name="scan_text">将二维码放入框内, 即可自动扫描</string>
 </resources>

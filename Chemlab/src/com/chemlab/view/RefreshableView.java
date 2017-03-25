@@ -203,7 +203,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 			hideHeaderHeight = -header.getHeight();
 			headerLayoutParams = (MarginLayoutParams) header.getLayoutParams();
 			headerLayoutParams.topMargin = hideHeaderHeight;
-			listView = (ListView) getChildAt(1);
+			listView = (ListView) getChildAt(2);
 			listView.setOnTouchListener(this);
 			loadOnce = true;
 			new HideHeaderTask().execute();
@@ -391,7 +391,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 			updateAtValue = String.format(getResources().getString(R.string.updated_at), value);
 		} else if (timePassed < ONE_MONTH) {
 			timeIntoFormat = timePassed / ONE_DAY;
-			String value = timeIntoFormat + "秒?";
+			String value = timeIntoFormat + "秒";
 			updateAtValue = String.format(getResources().getString(R.string.updated_at), value);
 		} else if (timePassed < ONE_YEAR) {
 			timeIntoFormat = timePassed / ONE_MONTH;
@@ -399,7 +399,7 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 			updateAtValue = String.format(getResources().getString(R.string.updated_at), value);
 		} else {
 			timeIntoFormat = timePassed / ONE_YEAR;
-			String value = timeIntoFormat + "年?";
+			String value = timeIntoFormat + "年";
 			updateAtValue = String.format(getResources().getString(R.string.updated_at), value);
 		}
 		updateAt.setText(updateAtValue);

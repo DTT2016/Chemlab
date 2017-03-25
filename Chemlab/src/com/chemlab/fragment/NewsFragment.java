@@ -73,7 +73,7 @@ public class NewsFragment extends Fragment {
 		}
 
 		adapter = new ArrayAdapter<String>(this.getActivity(),
-				R.layout.item_news_title, newsTitle);
+				R.layout.item_news_title_list, newsTitle);
 
 		updateNews();
 	}
@@ -124,15 +124,7 @@ public class NewsFragment extends Fragment {
 		//drugNameText = (EditText) view.findViewById(R.id.news_drug_name);
 		//drugSearchButton = (Button) view.findViewById(R.id.news_bt_search);
 		
-		view.findViewById(R.id.news_drug_name).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), SearchActivity.class);
-				startActivity(intent);
-			}
-		});
-		view.findViewById(R.id.news_bt_search).setOnClickListener(new OnClickListener() {
+		view.findViewById(R.id.searchbar).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -157,12 +149,12 @@ public class NewsFragment extends Fragment {
 		List<String> imgs = new ArrayList<String>();
 
 		/*
-		 * imgs.add(0,"http://211.66.136.32/img/banner1.jpg");
-		 * imgs.add(1,"http://211.66.136.32/img/banner2.jpg");
-		 * imgs.add(2,"http://211.66.136.32/img/banner3.jpg");
-		 * imgs.add(3,"http://211.66.136.32/img/banner4.jpg");
-		 */
-
+		imgs.add(0,"http://"+HttpUtil.HOST+"/img/banner1.jpg");
+		imgs.add(1,"http://"+HttpUtil.HOST+"/img/banner2.jpg");
+		imgs.add(2,"http://"+HttpUtil.HOST+"/img/banner3.jpg");
+		imgs.add(3,"http://"+HttpUtil.HOST+"/img/banner4.jpg");
+		*/
+		
 		imgs.add(0, "drawable://" + R.drawable.banner1);
 		imgs.add(1, "drawable://" + R.drawable.banner2);
 		imgs.add(2, "drawable://" + R.drawable.banner3);

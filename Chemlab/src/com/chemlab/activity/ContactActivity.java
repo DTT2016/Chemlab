@@ -1,9 +1,5 @@
 package com.chemlab.activity;
 
-import com.chemlab.R;
-import com.chemlab.objs.Contact;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,7 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class ContactActivity extends Activity implements OnClickListener{
+import com.chemlab.R;
+import com.chemlab.objs.Contact;
+
+public class ContactActivity extends BaseActivity implements OnClickListener{
 
 	private Contact contact;
 
@@ -25,7 +24,7 @@ public class ContactActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.contact_detail_info);
+		setContentView(R.layout.activity_contact_detail);
 
 		contact = (Contact) getIntent().getSerializableExtra("contact");
 		((TextView) findViewById(R.id.person_name)).setText(contact.getName());

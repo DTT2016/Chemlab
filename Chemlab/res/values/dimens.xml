@@ -5,7 +5,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     
     <dimen name="bottom_tab_padding_drawable">2.0dip</dimen>
-	<dimen name="bottom_tab_padding_up">5.0dip</dimen>
+	<dimen name="bottom_tab_padding_up">3.0dip</dimen>
 	<dimen name="bottom_tab_font_size">10.0dip</dimen>
+	<dimen name="personal_divider_margin">15.0dip</dimen>
 
 </resources>

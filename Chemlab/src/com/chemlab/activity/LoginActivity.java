@@ -48,7 +48,6 @@ public class LoginActivity extends Activity{
 			default:
 				break;
 			}
-			editor.commit();
 		}
 	};
 	
@@ -98,7 +97,7 @@ public class LoginActivity extends Activity{
 				} else {
 					editor.clear();
 				}*/
-				//editor.commit();
+				editor.commit();
 				
 				new Thread(new Runnable() {
 					

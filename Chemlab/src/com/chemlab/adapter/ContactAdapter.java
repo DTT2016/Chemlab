@@ -2,16 +2,16 @@ package com.chemlab.adapter;
 
 import java.util.List;
 
-import com.chemlab.R;
-import com.chemlab.objs.Contact;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.beardedhen.androidbootstrap.BootstrapThumbnail;
+import com.chemlab.R;
+import com.chemlab.objs.Contact;
 
 public class ContactAdapter extends ArrayAdapter<Contact> {
 
@@ -33,7 +33,7 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 		if (convertView == null) {
 			viewHolder = new ViewHolder();
 			view = LayoutInflater.from(getContext()).inflate(resourceId, null);
-			viewHolder.contactIcon = (ImageView) view
+			viewHolder.contactIcon = (BootstrapThumbnail) view
 					.findViewById(R.id.contact_image);
 			viewHolder.contactName = (TextView) view
 					.findViewById(R.id.contact_name);
@@ -43,13 +43,13 @@ public class ContactAdapter extends ArrayAdapter<Contact> {
 			viewHolder = (ViewHolder) view.getTag();
 		}
 
-		viewHolder.contactIcon.setImageResource(contact.getImageId());
+		viewHolder.contactIcon.setImage(contact.getImageId());
 		viewHolder.contactName.setText(contact.getName());
 		return view;
 	}
 
 	class ViewHolder {
-		ImageView contactIcon;
+		BootstrapThumbnail contactIcon;
 		TextView contactName;
 	}
 

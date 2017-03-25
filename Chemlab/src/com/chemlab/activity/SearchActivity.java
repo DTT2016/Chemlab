@@ -3,9 +3,6 @@ package com.chemlab.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chemlab.R;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +15,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class SearchActivity extends Activity {
+import com.chemlab.R;
+
+public class SearchActivity extends BaseActivity {
 
 	private Button searchButton;
 	private EditText editText;

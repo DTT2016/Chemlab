@@ -14,6 +14,7 @@ public class HttpUtil {
 	
 	public static String ID = MyApplication.ID;
 	public static String PW = MyApplication.PW;
+	public static String HOST = "bxw2359770225.my3w.com";
 	
 	public static final String ADDRESS_LOGIN_HANDLER = MyApplication.HOST+"/Ashx/LoginHandler.ashx";
 	public static final String ADDRESS_NEWS_HANDLER = MyApplication.HOST+"/Ashx/NewsHandler.ashx";
@@ -88,4 +89,13 @@ public class HttpUtil {
 		return "";
 	}
 	
+	public static String createJsonStr(String function,String attachArgvs){
+		String jsonString="json={" +
+				"\"type\":\""+function+"\"," +
+				"\"id\":\""+ID+"\"," +
+				"\"pw\":\""+PW+"\"," +
+				attachArgvs+
+				"}";
+		return jsonString;
+	}
 }

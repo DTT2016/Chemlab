@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements
 
 			@Override
 			public void onClick(View v) {
-				popupWindow.showAsDropDown(v,-50, 0);
+				popupWindow.showAsDropDown(v,-100, 3);
 				// 使其聚集
 				popupWindow.setFocusable(true);
 				//刷新状态（必须刷新否则无效）

@@ -2,16 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_gray"
     android:gravity="center"
     android:orientation="horizontal" >
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none" >
+
+        <com.chemlab.view.MyGridView
+            android:id="@+id/gridview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:horizontalSpacing="0.0dip"
+            android:listSelector="@null"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0.0dip" />
+    </ScrollView>
+    
     <com.chemlab.view.CircleMenuLayout
         android:id="@+id/id_menulayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="100dp"
-        android:background="@drawable/circle_bg3" >
+        android:visibility="gone"
+        android:background="@drawable/bg_circle" >
 
         <RelativeLayout
             android:id="@id/id_circle_menu_item_center"
