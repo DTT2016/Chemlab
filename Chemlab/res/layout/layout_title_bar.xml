@@ -41,7 +41,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dip"
         android:clickable="true"
-        android:background="@drawable/icon_title_btn"
+        android:background="@drawable/icon_title_menu"
         android:textColor="#fff"
         />
 

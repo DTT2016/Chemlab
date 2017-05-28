@@ -83,12 +83,10 @@
                 <ListView
                     android:id="@+id/news_title"
                     android:layout_width="match_parent"
-                    android:layout_height="106dp"
-                    android:divider="#abc"
-                    android:dividerHeight="1dp"
-                    android:footerDividersEnabled="true"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="5dp" >
+                    android:layout_height="110dp"
+                    android:divider="@drawable/transparent"
+                    android:footerDividersEnabled="false"
+                    android:padding="5dp" >
                 </ListView>
 
                 <TextView

@@ -1,5 +1,6 @@
 package com.chemlab.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import com.chemlab.R;
 import com.chemlab.objs.Contact;
 
-public class ContactActivity extends BaseActivity implements OnClickListener{
+public class ContactActivity extends Activity implements OnClickListener{
 
 	private Contact contact;
 
@@ -27,14 +28,14 @@ public class ContactActivity extends BaseActivity implements OnClickListener{
 		setContentView(R.layout.activity_contact_detail);
 
 		contact = (Contact) getIntent().getSerializableExtra("contact");
-		((TextView) findViewById(R.id.person_name)).setText(contact.getName());
-		((TextView) findViewById(R.id.phone_number)).setText(contact.getPhoneNumber());
-		((TextView) findViewById(R.id.QQ)).setText(contact.getQQNumber());
-		((TextView) findViewById(R.id.email)).setText(contact.getEmail());
+		((TextView) findViewById(R.id.textview_title)).setText(contact.getName());
+		findViewById(R.id.button_back).setOnClickListener(this);
 		
+		((TextView) findViewById(R.id.person_name)).setText(contact.getName());
 		findViewById(R.id.call_contact).setOnClickListener(this);
 		findViewById(R.id.send_message).setOnClickListener(this);
 		findViewById(R.id.call_QQ).setOnClickListener(this);
+		findViewById(R.id.view_detail).setOnClickListener(this);
 	}
 
 	@Override
@@ -58,7 +59,12 @@ public class ContactActivity extends BaseActivity implements OnClickListener{
 			} catch (Exception e) {
 				//Toast.makeText(ContactActivity.this, "Wrong in QQ", Toast.LENGTH_SHORT).show();
 			}
-			
+			break;
+		case R.id.view_detail:
+			UserActivity.actionStart(ContactActivity.this, contact,UserActivity.FROM_CONTACT);
+			break;
+		case R.id.button_back:
+			finish();
 			break;
 			
 		}

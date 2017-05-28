@@ -1,3 +1,5 @@
+package com.test;
+
 import com.chemlab.R;
 
 import android.os.Bundle;

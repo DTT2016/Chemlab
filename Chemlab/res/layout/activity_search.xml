@@ -2,44 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gray"
     android:orientation="vertical" >
 
+    <include layout="@layout/activity_search_bar" />
+
     <LinearLayout
+        android:id="@+id/search_result_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_gravity="top"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/edit_search"
-            android:layout_width="0dp"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3.5"
-            android:background="@drawable/bg_search"
-            android:drawableLeft="@drawable/icon_search"
-            android:inputType="text"
-            android:singleLine="true" />
+            android:background="#f3f3f3"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="搜索结果" />
 
-        <Button
-            android:id="@+id/bt_search"
-            android:layout_width="0dp"
+        <ListView
+            android:id="@+id/search_result_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/search" />
+            android:background="@drawable/fg_white"
+            android:divider="#f3f3f3"
+            android:dividerHeight="1dp"
+            android:footerDividersEnabled="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
+        </ListView>
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/search_result_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="#abc"
-        android:dividerHeight="1dp"
-        android:footerDividersEnabled="true"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
-    </ListView>
 
 </LinearLayout>

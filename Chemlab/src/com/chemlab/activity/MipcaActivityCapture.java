@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -19,9 +20,11 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chemlab.R;
+import com.chemlab.util.LogUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.zxing.camera.CameraManager;
@@ -54,6 +57,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		
+		((TextView) findViewById(R.id.textview_title)).setText("二维码扫描");
 		Button mButtonBack = (Button) findViewById(R.id.button_back);
 		mButtonBack.setOnClickListener(new OnClickListener() {
 			
@@ -67,6 +71,7 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		inactivityTimer = new InactivityTimer(this);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -119,13 +124,20 @@ public class MipcaActivityCapture extends Activity implements Callback {
 		if (resultString.equals("")) {
 			Toast.makeText(MipcaActivityCapture.this, "Scan failed!", Toast.LENGTH_SHORT).show();
 		}else {
-			Intent resultIntent = new Intent();
+			/*Intent resultIntent = new Intent();
 			Bundle bundle = new Bundle();
 			bundle.putString("result", resultString);
 			bundle.putParcelable("bitmap", barcode);
 			resultIntent.putExtras(bundle);
-			this.setResult(RESULT_OK, resultIntent);
+			this.setResult(RESULT_OK, resultIntent);*/
+			
+			LogUtil.d("Tag", resultString);
+			Toast.makeText(MipcaActivityCapture.this, resultString, Toast.LENGTH_LONG).show();
+			/*Uri uri = Uri.parse(resultString);    
+			Intent it = new Intent(Intent.ACTION_VIEW, uri);    
+			startActivity(it);*/
 		}
+		 
 		MipcaActivityCapture.this.finish();
 	}
 	

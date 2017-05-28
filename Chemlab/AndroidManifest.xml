@@ -14,10 +14,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     
+    <!-- 定位需要的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
     <!-- 二维码扫描需要的权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -38,29 +41,72 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <!-- <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".SearchResultActivity" /> -->
         </activity>
         <activity android:name="com.chemlab.activity.LoginActivity" >
         </activity>
         <activity android:name="com.chemlab.activity.MainActivity" >
         </activity>
-        <activity android:name="com.chemlab.activity.TestActivity" >
-        </activity>
         <activity android:name="com.chemlab.activity.ContactActivity" >
         </activity>
-        <activity android:name="com.chemlab.activity.UpdateContactActivity" >
+        <activity android:name="com.chemlab.activity.NewsListActivity" >
+        </activity>
+        <activity android:name="com.chemlab.activity.NewsDispActivity" >
+        </activity>
+        <activity android:name="com.chemlab.activity.SignInActivity">
+        </activity>
+        <activity android:name="com.chemlab.activity.SignResultActivity">
+        </activity>
+        <activity android:name="com.chemlab.activity.ThoughtActivity">
+        </activity>
+        <activity android:name="com.chemlab.activity.TodayActivity">
+        </activity>
+        <activity android:name="com.chemlab.activity.UserActivity">
+        </activity>
+        <activity android:name="com.chemlab.activity.GameActivity" >
+        </activity>
+        <activity android:name="com.chemlab.activity.WebViewActivity" >
+        </activity>
+        <activity android:name="com.chemlab.activity.SettingActivity" >
+        </activity>
+        <activity android:name="com.chemlab.activity.EditActivity" >
         </activity>
         <activity android:name="com.chemlab.activity.SearchActivity" >
         </activity>
-        <activity android:name="com.chemlab.systems.DrugSystemActivity" >
-        </activity>
-        <activity android:name="com.chemlab.systems.AssistentSystemActivity" >
+        <activity android:name="com.chemlab.activity.SearchSelectActivity" >
         </activity>
         
-        <activity android:name="com.chemlab.activity.CaptureActivity" >
+        <activity android:name="com.chemlab.systems.DrugSystemActivity" >
         </activity>
+        <activity android:name="com.chemlab.systems.CourseSystemActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.EquipmentSystemActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.LabSystemActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.WorkSystemActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.ResultListActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.DrugDetailActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.DrugLocActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.DrugMixDetailActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.DrugInOutActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.EquipmentDetailActivity" >
+        </activity>
+        <activity android:name="com.chemlab.systems.EquipmentLocActivity" >
+        </activity>
+        
+        <activity android:name="com.chemlab.about.AboutApp" >
+        </activity>
+        <activity android:name="com.chemlab.about.AboutChemlab" >
+        </activity>
+        <activity android:name="com.chemlab.about.FeedbackActivity" >
+        </activity>
+
         <activity
             android:name="com.chemlab.activity.MipcaActivityCapture"
             android:configChanges="orientation|keyboardHidden"
@@ -68,24 +114,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         
-        <!-- <activity
-            android:name="SearchResultActivity"
-            android:launchMode="singleTop" >
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" >
-                </action>
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" >
-            </meta-data>
+        <activity android:name="com.test.CircleMenuActivity" >
         </activity>
-        
-        <provider
-            android:name="SearchSuggestionSampleProvider"
-            android:authorities="com.android.cbin.SearchSuggestionSampleProvider" >
-        </provider> -->
     </application>
 
 </manifest>

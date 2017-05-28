@@ -1,7 +1,5 @@
 package com.chemlab.view;
 
-import com.chemlab.R;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -10,14 +8,16 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.View.OnTouchListener;
+import android.view.ViewConfiguration;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.chemlab.R;
 
 /**
  * 可进行下拉刷新的自定义控件�?
@@ -375,7 +375,10 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 		long timePassed = currentTime - lastUpdateTime;
 		long timeIntoFormat;
 		String updateAtValue;
-		if (lastUpdateTime == -1) {
+		
+		if (showType == TYPE_NO_UPDATE_AT) {
+			updateAtValue = "查看最新精彩资讯";
+		} else if (lastUpdateTime == -1) {
 			updateAtValue = getResources().getString(R.string.not_updated_yet);
 		} else if (timePassed < 0) {
 			updateAtValue = getResources().getString(R.string.time_error);
@@ -504,5 +507,14 @@ public class RefreshableView extends LinearLayout implements OnTouchListener {
 		void onRefresh();
 
 	}
-
+	
+	//以下方法以及变量是为了适应多处使用加入
+	public static final int TYPE_UPDATE_AT = 0;
+	public static final int TYPE_NO_UPDATE_AT = 1;
+	
+	private int showType = TYPE_UPDATE_AT;
+	
+	public void setShowType(int showType) {
+		this.showType = showType;
+	}
 }

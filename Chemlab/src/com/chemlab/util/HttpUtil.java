@@ -16,10 +16,14 @@ public class HttpUtil {
 	public static String PW = MyApplication.PW;
 	public static String HOST = "bxw2359770225.my3w.com";
 	
-	public static final String ADDRESS_LOGIN_HANDLER = MyApplication.HOST+"/Ashx/LoginHandler.ashx";
-	public static final String ADDRESS_NEWS_HANDLER = MyApplication.HOST+"/Ashx/NewsHandler.ashx";
-	public static final String ADDRESS_DRUG_HANDLER = MyApplication.HOST+"/Ashx/DrugHandler.ashx";
-	
+	public static final String ADDRESS_HOME = "http://"+HOST;
+	public static final String ADDRESS_LOGIN_HANDLER = ADDRESS_HOME+"/Ashx/LoginHandler.ashx";
+	public static final String ADDRESS_NEWS_HANDLER =  ADDRESS_HOME+"/Ashx/NewsHandler.ashx";
+	public static final String ADDRESS_DRUG_HANDLER =  ADDRESS_HOME+"/Ashx/DrugHandler.ashx";
+	public static final String ADDRESS_COURSE_HANDLER =  ADDRESS_HOME+"/Ashx/CourseHandler.ashx";
+	public static final String ADDRESS_EQUIPMENT_HANDLER =  ADDRESS_HOME+"/Ashx/EquipmentHandler.ashx";
+	public static final String ADDRESS_EXPERIMENT_HANDLER =  ADDRESS_HOME+"/Ashx/ExperHandler.ashx";
+	public static final String ADDRESS_STUDENT_HANDLER =  ADDRESS_HOME+"/Ashx/StudentHandler.ashx";
 	
 	public static void sendHttpRequest(final String address,final String argvs,final HttpCallbackListener listener) {
 		
@@ -44,11 +48,14 @@ public class HttpUtil {
 					connection.setReadTimeout(8000);
 					connection.setDoInput(true);
 					connection.setDoOutput(true);*/
-					
 					//POST
+					/*connection.setRequestMethod("POST");
+					DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+					out.writeBytes(argvs);*/
+					
 					connection.setRequestMethod("POST");
 					DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-					out.writeBytes(argvs);
+					out.write(argvs.getBytes());
 					
 					InputStream in = connection.getInputStream();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -84,18 +91,31 @@ public class HttpUtil {
 		return networkInfo!=null&&networkInfo.isConnectedOrConnecting();
 	}
 	
-	public static String requestWebservice(final String endPoint,String methodName,
-	          String [] parameters,String [] parValues){
-		return "";
-	}
-	
 	public static String createJsonStr(String function,String attachArgvs){
 		String jsonString="json={" +
 				"\"type\":\""+function+"\"," +
-				"\"id\":\""+ID+"\"," +
-				"\"pw\":\""+PW+"\"," +
 				attachArgvs+
-				"}";
+				"\"id\":\""+ID+"\"," +
+				"\"pw\":\""+PW+"\"}";
 		return jsonString;
+	}
+	
+	/*
+	 Error
+		error 0 “成功”;
+		error 01 “失败，未登录 “;
+		error 02 “失败，无权限”
+		error 03 “失败，该药品名已存在，此操作会覆盖之前的记录，请在原药品位置修改”;
+		error 04 “失败，修改药品信息失败”;
+		error 05 “失败，出入库表插入失败”;
+		error 06 “失败，修改药品信息失败”;
+		error 07 “失败，无数据传入”;
+		error 08 “失败，原药品不存在，请选择插入新药品”;
+		error 09 “失败，未知原因操作失败，请重试或联系管理员”
+		error 10 “失败，删除信息不存在”;
+	 */
+	public static String getErrorStatus(String errno){
+		
+		return "";
 	}
 }

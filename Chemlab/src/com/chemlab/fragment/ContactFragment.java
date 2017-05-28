@@ -14,6 +14,7 @@ import com.chemlab.adapter.ContactAdapter;
 import com.chemlab.objs.Contact;
 import com.chemlab.util.HttpCallbackListener;
 import com.chemlab.util.HttpUtil;
+import com.chemlab.util.LogUtil;
 import com.chemlab.view.RefreshableView;
 import com.chemlab.view.RefreshableView.PullToRefreshListener;
 
@@ -23,7 +24,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,14 +38,14 @@ public class ContactFragment extends Fragment implements OnItemClickListener {
 
 	private View view;
 
-	private ContactAdapter adapter;
+	private static ContactAdapter adapter;
 	private ListView contactListView;
-	private List<Contact> contactList;
+	private static List<Contact> contactList;
 	RefreshableView refreshableView;
 
-	private String argvs = "";
+	private static String argvs = "";
 
-	private Handler handler = new Handler() {
+	private static Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case UPDATED:
@@ -96,7 +96,7 @@ public class ContactFragment extends Fragment implements OnItemClickListener {
 			public void onRefresh() {
 				try {
 					updateContacts();
-					Thread.sleep(3000);
+					Thread.sleep(2000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -106,28 +106,25 @@ public class ContactFragment extends Fragment implements OnItemClickListener {
 		return view;
 	}
 
-	private void updateContacts() {
+	public static void updateContacts() {
 		argvs = HttpUtil.createJsonStr("GetInfoAll", "");
-		//Log.d("ContactFragment", argvs);
+		LogUtil.d("ContactFragment", argvs);
 		HttpUtil.sendHttpRequest(HttpUtil.ADDRESS_LOGIN_HANDLER, argvs,
 				new HttpCallbackListener() {
-
 					@Override
 					public void onFinish(String response) {
+						LogUtil.d("ContactFragment", response);
 						getContactsWithResponse(response);
-
 					}
-
 					@Override
 					public void onError(Exception e) {
-						// TODO Auto-generated method stub
+						e.printStackTrace();
 					}
 				});
-
 	}
 
-	private void getContactsWithResponse(String responseString) {
-		Log.d("ContactFragment", responseString);
+	private static void getContactsWithResponse(String responseString) {
+		//LogUtil.d("ContactFragment", responseString);
 		
 		try {
 			JSONObject responseObject = new JSONObject(responseString);
@@ -141,11 +138,19 @@ public class ContactFragment extends Fragment implements OnItemClickListener {
 					for (int i = 0; i < jsonObjArray.length(); i++) {
 						JSONObject contactInfo = jsonObjArray.getJSONObject(i);
 
-						Contact contact = new Contact(R.drawable.photo,
-								contactInfo.getString("name"),
-								contactInfo.getString("phonenumber_long"));
-						contact.setQQNumber(contactInfo.getString("QQ"));
+						Contact contact = new Contact(R.drawable.photo);
+						
+						contact.setId(contactInfo.getString("ID"));
+						contact.setName(contactInfo.getString("name"));
+						contact.setCreate_time(contactInfo.getString("creat_time"));
+						contact.setIdebtity(contactInfo.getString("idebtity"));
 						contact.setEmail(contactInfo.getString("email"));
+						contact.setQQNumber(contactInfo.getString("QQ"));
+						contact.setPhoneNumber(contactInfo.getString("phonenumber_long"));
+						contact.setPhoneShort(contactInfo.getString("phonenumber_short"));
+						contact.setAddress(contactInfo.getString("address"));
+						contact.setLast_time(contactInfo.getString("last_time"));
+						
 						contactList.add(contact);
 					}
 
@@ -154,12 +159,11 @@ public class ContactFragment extends Fragment implements OnItemClickListener {
 				sendHandleMessage(UPDATED);
 			}
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void sendHandleMessage(int mark) {
+	private static void sendHandleMessage(int mark) {
 		Message message = new Message();
 		message.what = mark;
 		handler.sendMessage(message);

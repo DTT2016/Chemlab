@@ -4,6 +4,7 @@ import com.chemlab.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -29,9 +30,6 @@ public class BaseActivity extends Activity {
 		case R.id.action_quit:
 			ActivityCollector.finishAll();
 			break;
-		case R.id.action_settings:
-			Toast.makeText(this, "Settings!", Toast.LENGTH_SHORT).show();
-			break;
 		default:
 			Toast.makeText(this, "All rights (c) DTT!", Toast.LENGTH_SHORT)
 			.show();
@@ -45,5 +43,14 @@ public class BaseActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		ActivityCollector.removeActivity(this);
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			moveTaskToBack(true);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

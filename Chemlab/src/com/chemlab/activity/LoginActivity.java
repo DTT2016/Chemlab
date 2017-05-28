@@ -1,13 +1,18 @@
 package com.chemlab.activity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.chemlab.R;
+import com.chemlab.util.HttpCallbackListener;
+import com.chemlab.util.HttpUtil;
+import com.chemlab.util.MyApplication;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,35 +26,7 @@ public class LoginActivity extends Activity{
 	
 	private EditText nameText;
 	private EditText passText;
-	//private CheckBox checkRemember;
 	private Button loginButton;
-	//private Button registerButton;
-	
-	private SharedPreferences.Editor editor;
-	private SharedPreferences pref;
-	
-	//private boolean isRemembered;
-	
-	Handler handler = new Handler(){
-		public void handleMessage(Message msg){
-			switch (msg.what) {
-			case SUCCEESS:
-				Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-				String priority = (String) msg.obj;
-				editor.putString("rank", priority);
-				startActivity(intent);
-				finish();
-				break;
-			case FAIL:
-				Toast.makeText(LoginActivity.this, "Sorry!No such a user", 
-						                     Toast.LENGTH_SHORT).show();
-				finish();
-				break;
-			default:
-				break;
-			}
-		}
-	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,21 +35,7 @@ public class LoginActivity extends Activity{
 		
 		nameText = (EditText) findViewById(R.id.loginName);
 		passText = (EditText) findViewById(R.id.loginPasswd);
-		//checkRemember = (CheckBox) findViewById(R.id.check_box);
 		loginButton = (Button) findViewById(R.id.btLogin);
-		//registerButton = (Button) findViewById(R.id.btReg);
-		
-		pref = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		/*isRemembered = pref.getBoolean("pasword_remembered", false);
-
-		if (isRemembered) {
-			String name = pref.getString("name", "");
-			String password = pref.getString("password", "");
-			nameText.setText(name);
-			passText.setText(password);
-			//checkRemember.setChecked(true);
-		}*/
 		
 		loginButton.setOnClickListener(new OnClickListener() {
 			
@@ -82,45 +45,91 @@ public class LoginActivity extends Activity{
 				final String pass = passText.getText().toString();
 				
 				if ("".equals(name)||"".equals(pass)) {
-					Toast.makeText(LoginActivity.this, "Please Input Complemetely!", 
+					Toast.makeText(LoginActivity.this, "输入不完整", 
 		                     Toast.LENGTH_SHORT).show();
+				}else {
+					login(name,pass);
 				}
 				
-				editor = pref.edit();
-				editor.putString("name", name);
-				editor.putString("password", pass);
-				
-				/*if (checkRemember.isChecked()) {
-					editor.putBoolean("pasword_remembered", true);
-					editor.putString("name", name);
-					editor.putString("password", pass);
-				} else {
-					editor.clear();
-				}*/
-				editor.commit();
-				
-				new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						/*String result = HttpUtil.requestWebservice(null,"TestLogin",
-						          new String[]{"name","pass"},new String[]{name,pass});*/
-						
-						Message message = new Message();
-						message.what=FAIL;
-						handler.sendMessage(message);
-						/*if (result == null) {
-							message.what=FAIL;
-							handler.sendMessage(message);
-						} else{
-							message.what=SUCCEESS;
-							message.obj = result;
-							handler.sendMessage(message);
-						}*/
-					}
-				}).start();
 			}
 		});
-		//registerButton.setOnClickListener(this);
+	}
+	
+	public void login(final String id,final String pw){
+		String jsonString="json={" +
+				"\"type\":\"GetInfoByID\"," +
+				"\"id\":\""+id+"\"," +
+				"\"find_id\":\""+id+"\"," +
+				"\"pw\":\""+pw+"\"}";
+		
+		HttpUtil.sendHttpRequest(HttpUtil.ADDRESS_LOGIN_HANDLER, jsonString, new HttpCallbackListener() {
+			
+			@Override
+			public void onFinish(String response) {
+				JSONObject responseObject;
+				try {
+					responseObject = new JSONObject(response);
+
+					if (responseObject.getString("error").equals("0")) {
+						JSONArray jsonObjArray = responseObject
+								.getJSONArray("data");
+						
+						JSONObject meInfo = jsonObjArray.getJSONObject(0);
+						MyApplication.ID = id;
+						MyApplication.PW = pw;
+						HttpUtil.ID = id;
+						HttpUtil.PW = pw;
+						
+						MyApplication.saveString("user_id", id);
+						MyApplication.saveString("user_password", pw);
+						MyApplication.saveString("user_name", meInfo.getString("name"));
+						MyApplication.saveString("user_idebtity", meInfo.getString("idebtity"));
+						MyApplication.saveString("user_telephone", meInfo.getString("phonenumber_long"));
+						MyApplication.saveString("user_phone_short", meInfo.getString("phonenumber_short"));
+						MyApplication.saveString("user_qq_number", meInfo.getString("QQ"));
+						MyApplication.saveString("user_email", meInfo.getString("email"));
+						MyApplication.saveString("user_address", meInfo.getString("address"));
+						MyApplication.saveString("user_create_time", meInfo.getString("creat_time"));
+						MyApplication.saveString("user_last_time", meInfo.getString("last_time"));
+						
+						MyApplication.setMEInfo();
+						
+						runOnUiThread(new Runnable() {
+							public void run() {
+								Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+			                    startActivity(intent);
+			                    finish();
+							}
+						});
+						
+					}else {
+						runOnUiThread(new Runnable() {
+							public void run() {
+								Toast.makeText(LoginActivity.this, "登录失败", 
+					                     Toast.LENGTH_SHORT).show();
+							}
+						});
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onError(Exception e) {
+				
+			}
+		});
+		
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			ActivityCollector.finishAll();
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }

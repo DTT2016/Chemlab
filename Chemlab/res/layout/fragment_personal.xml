@@ -18,7 +18,7 @@
             android:id="@+id/id_user_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/activity_margin_top"
             android:background="@drawable/bg_user_info"
             android:clickable="true"
             android:orientation="horizontal"
@@ -41,12 +41,14 @@
                 android:paddingLeft="20dp" >
 
                 <TextView
+                    android:id="@+id/id_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="黄老师"
                     android:textSize="22sp" />
 
                 <TextView
+                    android:id="@+id/id_user_role"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="管理员"
@@ -62,6 +64,7 @@
         </LinearLayout>
 
         <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/id_check_in"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
@@ -71,15 +74,7 @@
             bootstrapbutton:bb_type="warning" />
         
         <com.beardedhen.androidbootstrap.BootstrapButton
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="@dimen/personal_divider_margin"
-            android:text="今日感想"
-            bootstrapbutton:bb_icon_left="fa-cloud"
-            bootstrapbutton:bb_roundedCorners="false"
-            bootstrapbutton:bb_type="default" />
-        
-        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/id_about_chemlab"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/personal_divider_margin"
@@ -89,15 +84,27 @@
             bootstrapbutton:bb_type="default" />
         
         <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/id_setting"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="@dimen/personal_divider_margin"
-            android:text="关于APP"
+            android:text="设置"
+            bootstrapbutton:bb_icon_left="fa-cloud"
+            bootstrapbutton:bb_roundedCorners="false"
+            bootstrapbutton:bb_type="default" />
+        
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/id_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="@dimen/personal_divider_margin"
+            android:text="反馈建议"
             bootstrapbutton:bb_icon_left="fa-cloud"
             bootstrapbutton:bb_roundedCorners="false"
             bootstrapbutton:bb_type="default" />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/id_quit_app"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="36dp"

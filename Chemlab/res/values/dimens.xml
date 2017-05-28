@@ -8,5 +8,7 @@
 	<dimen name="bottom_tab_padding_up">3.0dip</dimen>
 	<dimen name="bottom_tab_font_size">10.0dip</dimen>
 	<dimen name="personal_divider_margin">15.0dip</dimen>
+	<dimen name="drug_divider_margin">5.0dip</dimen>
+	<dimen name="activity_margin_top">20dp</dimen>
 
 </resources>
