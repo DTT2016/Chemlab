@@ -9,6 +9,7 @@
     <include layout="@layout/activity_title" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/work_arrange"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/activity_margin_top"
@@ -19,6 +20,7 @@
         bootstrapbutton:bb_type="default" />
     
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/work_view"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/drug_divider_margin"
@@ -39,6 +41,7 @@
         bootstrapbutton:bb_type="default" />
     
     <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/work_freetime_report"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/drug_divider_margin"

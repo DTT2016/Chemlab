@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.chemlab.R;
 import com.chemlab.util.HttpCallbackListener;
 import com.chemlab.util.HttpUtil;
+import com.chemlab.util.LogUtil;
 import com.chemlab.view.InfoDispView;
 
 public class EquipmentLocActivity extends Activity {
@@ -72,35 +73,36 @@ public class EquipmentLocActivity extends Activity {
 	}
 
 	private void initLocInfoViews() {
-		locState = (InfoDispView) findViewById(R.id.loc_id);
-		locPPE = (InfoDispView) findViewById(R.id.loc_position);
-		locOperator = (InfoDispView) findViewById(R.id.loc_unit);
-		locBuyingTime = (InfoDispView) findViewById(R.id.loc_scatter);
-		locFactoryNO = (InfoDispView) findViewById(R.id.loc_counting);
-		locPosition = (InfoDispView) findViewById(R.id.loc_standard);
-		locStateExplane = (InfoDispView) findViewById(R.id.loc_editor);
-		locEditTime = (InfoDispView) findViewById(R.id.loc_edittime);
-
 		
+		locPPE = (InfoDispView) findViewById(R.id.loc_equip_ppe);
+		locBuyingTime = (InfoDispView) findViewById(R.id.loc_equip_buytime);
+		locFactoryNO = (InfoDispView) findViewById(R.id.loc_equip_fac);
+		locPosition = (InfoDispView) findViewById(R.id.loc_equip_pos);
+		locState = (InfoDispView) findViewById(R.id.loc_equip_state);
+		locStateExplane = (InfoDispView) findViewById(R.id.loc_equip_explane);
+		locOperator = (InfoDispView) findViewById(R.id.loc_equip_op);
+		locEditTime = (InfoDispView) findViewById(R.id.loc_equip_edittime);
+
 		locPPE.setTitleText("固定资产号");
 		locFactoryNO.setTitleText("公司编号");
 		locBuyingTime.setTitleText("购买时间");
-		locOperator.setTitleText("操作人");
 		locPosition.setTitleText("位置");
 		locState.setTitleText("状态");
 		locStateExplane.setTitleText("状态说明");
+		locOperator.setTitleText("操作人");
 		locEditTime.setTitleText("编辑时间");
 	}
 	
 	private void updateLocInfo() {
-		String httpLink = HttpUtil.ADDRESS_DRUG_HANDLER;
-		String argvs = HttpUtil.createJsonStr("GetEquipLoc", "\"drug\":\""
+		String httpLink = HttpUtil.ADDRESS_EQUIPMENT_HANDLER;
+		String argvs = HttpUtil.createJsonStr("GetEquipLocDetail", "\"equip_name\":\""
 				+ equipString + "\",");
 
 		HttpUtil.sendHttpRequest(httpLink, argvs, new HttpCallbackListener() {
 
 			@Override
 			public void onFinish(String response) {
+				LogUtil.d("Tag", response);
 				JSONObject responseObject;
 				try {
 					responseObject = new JSONObject(response);
@@ -122,16 +124,17 @@ public class EquipmentLocActivity extends Activity {
 						if (jsonObjArray.length() > 0) {
 							final JSONObject locInfo = (JSONObject) jsonObjArray
 									.get(0);
+							//LogUtil.d(locInfo.toString());
 							runOnUiThread(new Runnable() {
 								public void run() {
 									try {
-										locState.setContentText(locInfo.getString("id"));
-										locPPE.setContentText(locInfo.getString("position"));
-										locOperator.setContentText(locInfo.getString("each"));
-										locBuyingTime.setContentText(locInfo.getString("remain"));
-										locFactoryNO.setContentText(locInfo.getString("counting"));
-										locPosition.setContentText(locInfo.getString("standard"));
-										locStateExplane.setContentText(locInfo.getString("people"));
+										locPPE.setContentText(locInfo.getString("fixed_assets_NO"));
+										locBuyingTime.setContentText(locInfo.getString("time_buying"));
+										locFactoryNO.setContentText(locInfo.getString("factory_NO"));
+										locPosition.setContentText(locInfo.getString("position"));
+										locState.setContentText(locInfo.getString("state"));
+										locStateExplane.setContentText(locInfo.getString("state_explane"));
+										locOperator.setContentText(locInfo.getString("people"));
 										locEditTime.setContentText(locInfo.getString("edit_time"));
 									} catch (JSONException e) {
 										e.printStackTrace();

@@ -29,9 +29,9 @@ public class EquipmentDetailActivity extends Activity {
 
 	private String equipmentString;
 
-	public static void actionStart(Context context, String drug) {
+	public static void actionStart(Context context, String equip) {
 		Intent intent = new Intent(context, EquipmentDetailActivity.class);
-		intent.putExtra("drug", drug);
+		intent.putExtra("equip", equip);
 		context.startActivity(intent);
 	}
 
@@ -41,7 +41,7 @@ public class EquipmentDetailActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.system_equipment_detail);
 
-		equipmentString = getIntent().getStringExtra("drug");
+		equipmentString = getIntent().getStringExtra("equip");
 
 		((TextView) findViewById(R.id.textview_title)).setText("药品详情");
 		findViewById(R.id.button_back).setOnClickListener(

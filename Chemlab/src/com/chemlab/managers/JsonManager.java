@@ -11,9 +11,13 @@ import com.chemlab.objs.Drug;
 import com.chemlab.objs.DrugMix;
 import com.chemlab.objs.Equipment;
 import com.chemlab.objs.News;
+import com.chemlab.objs.WorkInfo;
 
 public class JsonManager {
 
+	public static final int TYPE_SIGN = 0;
+	public static final int TYPE_WORK = 0;
+	
 	public JsonManager() {
 	}
 
@@ -138,4 +142,40 @@ public class JsonManager {
 
 		return list;
 	}
+	
+	public static List<WorkInfo> getWorkInfoInfoArray(JSONArray jsonArray,int type) {
+
+		if (jsonArray.length() == 0) {
+			return null;
+		}
+
+		List<WorkInfo> list = new ArrayList<WorkInfo>();
+
+		try {
+			WorkInfo sInfo;
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject signInfo = jsonArray.getJSONObject(i);
+				sInfo = new WorkInfo();
+				
+				sInfo.setTime_id(signInfo.getString("time_id"));
+				sInfo.setID(signInfo.getString("ID"));
+				sInfo.setName(signInfo.getString("name"));
+				sInfo.setDate_time(signInfo.getString("date_time"));
+				
+				if (type == TYPE_SIGN) {
+					sInfo.setState(signInfo.getString("state"));
+				} else if (type == TYPE_WORK) {
+					sInfo.setState(signInfo.getString("time_type"));
+				}
+				
+
+				list.add(sInfo);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 }

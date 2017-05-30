@@ -128,7 +128,8 @@ public class ResultListActivity extends Activity {
 		case SearchActivity.SEARCH_EQUIPMENT:
 			titleString = "仪器信息管理";
 			httpLink = HttpUtil.ADDRESS_EQUIPMENT_HANDLER;
-			argvs = "";
+			argvs = HttpUtil.createJsonStr("GetEquip", 
+					"\"equip_name\":\"\",");
 			//list = new ArrayList<Drug>();
 			break;
 		default:
@@ -263,7 +264,7 @@ public class ResultListActivity extends Activity {
 			
 			break;
 		case SearchActivity.SEARCH_EQUIPMENT:
-			
+			EquipmentDetailActivity.actionStart(ResultListActivity.this, ((Result)resultList.get(pos)).getName());
 			break;
 		default:
 			

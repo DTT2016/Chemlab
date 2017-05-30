@@ -74,6 +74,8 @@
         </activity>
         <activity android:name="com.chemlab.activity.SearchSelectActivity" >
         </activity>
+        <activity android:name="com.chemlab.activity.WeekActivity" >
+        </activity>
         
         <activity android:name="com.chemlab.systems.DrugSystemActivity" >
         </activity>

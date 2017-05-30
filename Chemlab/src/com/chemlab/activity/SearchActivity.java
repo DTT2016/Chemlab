@@ -28,9 +28,11 @@ import com.chemlab.adapter.ResultListAdapter;
 import com.chemlab.managers.JsonManager;
 import com.chemlab.objs.Drug;
 import com.chemlab.objs.DrugMix;
+import com.chemlab.objs.Equipment;
 import com.chemlab.objs.Result;
 import com.chemlab.systems.DrugDetailActivity;
 import com.chemlab.systems.DrugMixDetailActivity;
+import com.chemlab.systems.EquipmentDetailActivity;
 import com.chemlab.util.HttpCallbackListener;
 import com.chemlab.util.HttpUtil;
 import com.chemlab.util.LogUtil;
@@ -200,6 +202,9 @@ public class SearchActivity extends Activity {
 		case SEARCH_COURSE:
 			break;
 		case SEARCH_EQUIPMENT:
+			argvs = HttpUtil.createJsonStr("GetEquip", "\"equip_name\":\"" + name
+					+ "\",");
+			
 			break;
 		default:
 			break;
@@ -269,7 +274,29 @@ public class SearchActivity extends Activity {
 
 			break;
 		case SEARCH_EQUIPMENT:
+			if (list != null && list.isEmpty()) {
+				list.clear();
+			}
+			list = JsonManager.getEquipmentArray(jsonObjArray);
+			// LogUtil.d("Tag", ((Drug) list.get(0)).getDrug_name());
+			if (list != null && !list.isEmpty()) {
+				Equipment temp;
+				resultList.clear();
+				for (int i = 0; i < list.size(); i++) {
+					Result result = new Result();
+					temp = (Equipment) list.get(i);
+					result.setName(temp.getName());
+					result.setProp1(temp.getPrice());
+					result.setProp2(temp.getFactory());
 
+					resultList.add(result);
+				}
+				runOnUiThread(new Runnable() {
+					public void run() {
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
 			break;
 		default:
 
@@ -323,7 +350,7 @@ public class SearchActivity extends Activity {
 			
 			break;
 		case SEARCH_EQUIPMENT:
-			
+			EquipmentDetailActivity.actionStart(SearchActivity.this, ((Result)resultList.get(pos)).getName());
 			break;
 		default:
 			
